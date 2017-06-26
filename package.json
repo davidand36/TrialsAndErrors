@@ -1,33 +1,25 @@
 {
-  "name": "SimpleExpressServerForHeroku",
+  "name": "TrialsAndErrors",
   "version": "0.1.0",
-  "description": "A simple server based on Node.js and Express for deployment on Heroku",
+  "description": "A playpen for Web experiments",
   "main": "web.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/davidand36/SimpleExpressServerForHeroku.git"
+    "url": "https://github.com/davidand36/TrialsAndErrors.git"
   },
   "keywords": [
-    "express",
-    "static",
-    "heroku"
+    "experiments"
   ],
   "author": "David M. Anderson",
-  "license": "GPL 3.0",
-  "bugs": {
-    "url": "https://github.com/davidand36/SimpleExpressServerForHeroku/issues"
-  },
+  "license": "AGPL-3.0",
   "engines": {
-      "node": "0.10.x"
+      "node": ">=7.0.0"
   },
-  "homepage": "https://github.com/davidand36/SimpleExpressServerForHeroku",
+  "homepage": "https://github.com/davidand36/TrialsAndErrors",
   "dependencies": {
-    "compression": "^1.0.9",
-    "express": "^4.7.2",
-    "logfmt": "^1.1.2",
-    "serve-favicon": "^2.0.1"
+    "compression": "^1.6.2",
+    "express": "^4.15.3",
+    "logfmt": "^1.2.0",
+    "serve-favicon": "^2.4.3"
   }
 }
