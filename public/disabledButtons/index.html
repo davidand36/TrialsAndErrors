@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Disabled Buttons</title>
+    <link rel="stylesheet" type="text/css" href="disabledButtons.css" />
+  </head>
+
+  <body>
+    <h1>Disabled Buttons</h1>
+    <h2>Some approaches to disabling buttons, with accessability in mind</h2>
+
+    <form id="attrForm">
+      <p>
+        This uses the HTML attribute <code>disabled</code>.
+      </p>
+      <input type="text" id="attrFormInput" />
+      <button type="button">Submit</button>
+      <p class="output"></p>
+    </form>
+
+    <form id="ariaForm">
+      <p>
+        This uses the ARIA attribute <code>aria-disabled</code>.
+      </p>
+      <input type="text" id="ariaFormInput" />
+      <button type="button">Submit</button>
+      <p class="output"></p>
+    </form>
+
+    <form id="nonvisualForm">
+      <p>
+        This uses a nonvisual text element.
+      </p>
+      <input type="text" id="nonvisualFormInput" />
+      <button type="button">Submit</button>
+      <p class="output"></p>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="  crossorigin="anonymous"></script>
+    <script src="disabledButtons.js"></script>
+  </body>
+</html>

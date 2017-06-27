@@ -1,0 +1,54 @@
+/*
+    buttons.css
+*/
+
+form {
+    border: 1px solid blue;
+}
+
+button {
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 100px;
+    border-style: solid;
+    border-width: 2px;
+    white-space: nowrap;
+    background-color: #44707C;
+    color: #FFFFFF;
+    border-color: #44707C;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #395E68;
+    color: #FFFFFF;
+    border-color: #395E68;
+}
+
+button:active {
+    background-color: #FFFFFF;
+    color: #44707C;
+    border-color: #44707C;
+}
+
+button:disabled,
+button:disabled:hover,
+button[aria-disabled]:not([aria-disabled="false"]),
+button[aria-disabled]:not([aria-disabled="false"]):hover,
+button.disabled,
+button.disabled:hover {
+    cursor: default;
+    background-color: #F5F4F4;
+    color: #C9C7C7;
+    border-color: #F5F4F4;
+}
+
+
+.nonvisual {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
