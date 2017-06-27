@@ -29,7 +29,7 @@ function setupAttrForm( ) {
     }
 
     function handleSubmit( ) {
-        if ( isEnabled( $button) ) {
+        if ( isButtonEnabled( $button) ) {
             $output.text( 'You entered "' + $input.val() + '"');
         }
     }
@@ -42,7 +42,7 @@ function setupAttrForm( ) {
         $(btn).prop( 'disabled', true );
     }
 
-    function isEnabled( btn ) {
+    function isButtonEnabled( btn ) {
         return $(btn).prop( 'disabled' ) === false;
     }
 }
@@ -68,7 +68,7 @@ function setupAriaForm( ) {
     }
 
     function handleSubmit( ) {
-        if ( isEnabled( $button) ) {
+        if ( isButtonEnabled( $button) ) {
             $output.text( 'You entered "' + $input.val() + '"');
         }
     }
@@ -86,7 +86,7 @@ function setupAriaForm( ) {
         $(btn).attr( 'tabindex', -1 );
     }
 
-    function isEnabled( btn ) {
+    function isButtonEnabled( btn ) {
         return $(btn).attr( 'aria-disabled' ) !== 'true';
     }
 }
@@ -113,7 +113,7 @@ function setupNonvisualForm( ) {
     }
 
     function handleSubmit( ) {
-        if ( isEnabled( $button) ) {
+        if ( isButtonEnabled( $button) ) {
             $output.text( 'You entered "' + $input.val() + '"');
         }
     }
@@ -136,7 +136,7 @@ function setupNonvisualForm( ) {
         $(btn).attr( 'tabindex', -1 );
     }
 
-    function isEnabled( btn ) {
+    function isButtonEnabled( btn ) {
         return $(btn).hasClass( 'disabled' ) === false;
     }
 }
