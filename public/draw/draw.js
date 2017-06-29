@@ -20,7 +20,7 @@ var defaultConfig = {
 var $drawingArea = $('#drawingArea');
 var heightWidthRatio = defaultConfig.height / defaultConfig.width;
 var canvasScale = 1.0;
-var drawing = true;
+var drawingTool = 'pen';
 var lastPos;
 
 //=============================================================================
@@ -101,11 +101,14 @@ function init( ) {
 
 function startPath( evt ) {
     var pos = getCanvasPos( evt );
-    if ( drawing ) {
+    switch ( drawingTool ) {
+    case 'pen':
         context.beginPath( );
         context.moveTo( pos.x, pos.y );
-    } else {
+        break;
+    case 'eraser':
         lastPos = pos;
+        break;
     }
 
     $drawingArea.on( 'mousemove', continuePath );
@@ -116,12 +119,15 @@ function startPath( evt ) {
 
 function continuePath( evt ) {
     var pos = getCanvasPos( evt );
-    if ( drawing ) {
+    switch ( drawingTool ) {
+    case 'pen':
         context.lineTo( pos.x, pos.y );
         context.stroke( );
-    } else {
+        break;
+    case 'eraser':
         eraseSegment( lastPos, pos );
         lastPos = pos;
+        break;
     }
 }
 
@@ -152,13 +158,13 @@ function eraseSegment( pos1, pos2 ) {
 
 function changeColor( evt ) {
     context.strokeStyle = $(this).val();
-    drawing = true;
+    drawingTool = 'pen';
 }
 
 //-----------------------------------------------------------------------------
 
 function setEraser( evt ) {
-    drawing = false;
+    drawingTool = 'eraser';
 }
 
 //-----------------------------------------------------------------------------
@@ -167,7 +173,7 @@ function clearCanvas( evt ) {
     if ( window.confirm( 'Erase everything? But your nice picture...' ) ) {
         context.clearRect( 0, 0, canvas.width, canvas.height );
         clearSavedDrawing( );
-        drawing = true;
+        drawingTool = 'pen';
     }
 }
 
