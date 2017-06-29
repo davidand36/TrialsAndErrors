@@ -1,0 +1,19 @@
+/*
+    draw.css
+*/
+
+#drawingArea {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid;
+    cursor: default;
+}
+
+#drawingArea canvas {
+    width: 100%;
+}
+
+#tools {
+    text-align: center;
+}

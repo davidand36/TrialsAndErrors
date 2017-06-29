@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Draw</title>
+    <link rel="stylesheet" type="text/css" href="draw.css" />
+  </head>
+
+  <body>
+    <h1>Draw</h1>
+
+    <div id="drawingArea"></div>
+    <div id="tools">
+      <label for="color">Color:</label>
+      <input type="color" id="color" />
+      <button type="button" id="eraser">Eraser</button>
+      <button type="button" id="clear">Erase Everything</button>
+      <label for="lineWidth">Width:</label>
+      <input type="number" min="1" id="lineWidth" />
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="  crossorigin="anonymous"></script>
+    <script src="draw.js"></script>
+  </body>
+</html>
