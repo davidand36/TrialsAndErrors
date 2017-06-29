@@ -12,8 +12,8 @@ var context;
 var CONFIG_KEY = 'Draw_Config';
 var STATE_KEY = 'Draw_State';
 var defaultConfig = {
-    width: 640,
-    height: 480,
+    width: 800,
+    height: 600,
     color: '#000000',
     lineWidth: 10
 }
