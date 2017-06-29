@@ -2,6 +2,10 @@
     draw.css
 */
 
+h1 {
+    text-align: center;
+}
+
 #drawingArea {
     width: 90%;
     margin-left: auto;
