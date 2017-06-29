@@ -20,7 +20,6 @@ var defaultConfig = {
 var $drawingArea = $('#drawingArea');
 var heightWidthRatio = defaultConfig.height / defaultConfig.width;
 var canvasScale = 1.0;
-var drawingTool = 'pen';
 var lastPos;
 
 //=============================================================================
@@ -28,7 +27,7 @@ var lastPos;
 init( );
 $drawingArea.on( 'mousedown', startPath );
 $(window).on( 'resize', resize );
-$('#color').on( 'change input', changeColor );
+$('#color').on( 'click change input', changeColor );
 $('#eraser').on( 'click', setEraser );
 $('#clear').on( 'click', clearCanvas );
 $('#lineWidth').on( 'change input', changeLineWidth );
@@ -38,9 +37,8 @@ $('#lineWidth').on( 'change input', changeLineWidth );
 function init( ) {
     var config = getConfig( );
     var savedState = getSavedState( );
-    canvas = createCanvas( config );
+    createCanvas( config );
     resize( );
-    context = canvas.getContext( '2d' );
     setContextSettings( config );
     setToolVals( config );
     restoreDrawing( savedState );
@@ -73,11 +71,11 @@ function init( ) {
 
     function createCanvas( config ) {
         $drawingArea.css( 'max-width', config.width );
-        var canvas = $('<canvas>')[0];
+        canvas = $('<canvas>')[0];
         canvas.width = config.width;
         canvas.height = config.height;
         $('#drawingArea').append( $(canvas) );
-        return canvas;
+        context = canvas.getContext( '2d' );
     }
 
     //=========================================================================
@@ -101,15 +99,8 @@ function init( ) {
 
 function startPath( evt ) {
     var pos = getCanvasPos( evt );
-    switch ( drawingTool ) {
-    case 'pen':
-        context.beginPath( );
-        context.moveTo( pos.x, pos.y );
-        break;
-    case 'eraser':
-        lastPos = pos;
-        break;
-    }
+    context.beginPath( );
+    context.moveTo( pos.x, pos.y );
 
     $drawingArea.on( 'mousemove', continuePath );
     $(window).on( 'mouseup', finishPath );
@@ -119,16 +110,8 @@ function startPath( evt ) {
 
 function continuePath( evt ) {
     var pos = getCanvasPos( evt );
-    switch ( drawingTool ) {
-    case 'pen':
-        context.lineTo( pos.x, pos.y );
-        context.stroke( );
-        break;
-    case 'eraser':
-        eraseSegment( lastPos, pos );
-        lastPos = pos;
-        break;
-    }
+    context.lineTo( pos.x, pos.y );
+    context.stroke( );
 }
 
 //-----------------------------------------------------------------------------
@@ -140,31 +123,17 @@ function finishPath( evt ) {
     saveDrawing( );
 }
 
-//-----------------------------------------------------------------------------
-
-function eraseAt( pos ) {
-    var lw = context.lineWidth;
-    context.clearRect( pos.x - lw / 2, pos.y - lw / 2, lw, lw );
-}
-
-//-----------------------------------------------------------------------------
-
-function eraseSegment( pos1, pos2 ) {
-    //!!!Bressenham
-    eraseAt( pos2 );
-}
-
 //=============================================================================
 
 function changeColor( evt ) {
     context.strokeStyle = $(this).val();
-    drawingTool = 'pen';
+    context.globalCompositeOperation = 'source-over';
 }
 
 //-----------------------------------------------------------------------------
 
 function setEraser( evt ) {
-    drawingTool = 'eraser';
+    context.globalCompositeOperation = 'destination-out';
 }
 
 //-----------------------------------------------------------------------------
@@ -173,7 +142,7 @@ function clearCanvas( evt ) {
     if ( window.confirm( 'Erase everything? But your nice picture...' ) ) {
         context.clearRect( 0, 0, canvas.width, canvas.height );
         clearSavedDrawing( );
-        drawingTool = 'pen';
+        context.globalCompositeOperation = 'source-over';
     }
 }
 
@@ -233,5 +202,7 @@ function clearSavedDrawing( ) {
     localStorage[ STATE_KEY ] = JSON.stringify( {
     } );
 }
+
+//=============================================================================
 
 })();
