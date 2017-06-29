@@ -105,12 +105,11 @@ function startPath( evt ) {
         context.beginPath( );
         context.moveTo( pos.x, pos.y );
     } else {
-        eraseAt( pos );
         lastPos = pos;
     }
 
     $drawingArea.on( 'mousemove', continuePath );
-    $drawingArea.on( 'mouseup', finishPath );
+    $(window).on( 'mouseup', finishPath );
 }
 
 //-----------------------------------------------------------------------------
@@ -129,7 +128,9 @@ function continuePath( evt ) {
 //-----------------------------------------------------------------------------
 
 function finishPath( evt ) {
-    $drawingArea.off( 'mousemove mouseup' );
+    $drawingArea.off( 'mousemove', continuePath );
+    $(window).off( 'mouseup', finishPath );
+    continuePath( evt );
     saveDrawing( );
 }
 
