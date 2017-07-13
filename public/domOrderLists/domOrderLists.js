@@ -1,7 +1,18 @@
 /*
     domOrderLists.js
 
-    Algorithm to consolidate lists
+    Algorithm to consolidate lists.
+
+    The listConsolidator object has two public methods:
+    consolidate() takes three lists (contentItems, dragObjects, dropZones ),
+        and returns a consolidated list. It adds type fields to any items that
+        don't already have them. It also sets or adjusts domOrder fields on the
+        items, making sure that they are consecutive with no gaps.
+    fixup() takes a consolidated list produced by consolidate() and fixes it up
+        after any reordering that may have taken place. It automatically also
+        updates the domOrder fields in the three original lists.
+    NOTE: Adding or deleting items should be done in the separate lists,
+        followed by calling consolidate() again. I think.
 */
 
 var listConsolidator = (function() {
