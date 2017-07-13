@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quick Draw</title>
+  </head>
+
+  <body>
+    <h1>Quick Draw</h1>
+
+    <div id="controls">
+      <button id="legacy">Legacy data</button>
+      <button id="good">Good data</button>
+      <button id="bad">Bad data</button>
+      <button id="shuffle">Shuffle</button>
+    </div>
+    <strong>Before:</strong>
+    <div id="before">
+      Consolidated:
+      <ul id="beforeConsolidated">
+      </ul>
+      Content items:
+      <ul id="beforeContent">
+      </ul>
+      Drag objects:
+      <ul id="beforeDrag">
+      </ul>
+      Drop zones:
+      <ul id="beforeDrop">
+      </ul>
+    </div>
+    <strong>After:</strong>
+    <div id="after">
+      Consolidated:
+      <ul id="afterConsolidated">
+      </ul>
+      Content items:
+      <ul id="afterContent">
+      </ul>
+      Drag objects:
+      <ul id="afterDrag">
+      </ul>
+      Drop zones:
+      <ul id="afterDrop">
+      </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="domOrderLists.js"></script>
+  </body>
+</html>
