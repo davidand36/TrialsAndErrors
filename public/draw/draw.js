@@ -98,6 +98,7 @@ function init( ) {
 //=============================================================================
 
 function startPath( evt ) {
+    evt.preventDefault( );
     var pos = getCanvasPos( evt );
     context.beginPath( );
     context.moveTo( pos.x, pos.y );
@@ -110,6 +111,7 @@ function startPath( evt ) {
 //-----------------------------------------------------------------------------
 
 function continuePath( evt ) {
+    evt.preventDefault( );
     var pos = getCanvasPos( evt );
     context.lineTo( pos.x, pos.y );
     context.stroke( );
@@ -118,6 +120,7 @@ function continuePath( evt ) {
 //-----------------------------------------------------------------------------
 
 function finishPath( evt ) {
+    evt.preventDefault( );
     $drawingArea.off( 'mousemove touchmove', continuePath );
     $(window).off( 'mouseup touchend', finishPath );
     $drawingArea.off( 'mouseleave', finishPath );
