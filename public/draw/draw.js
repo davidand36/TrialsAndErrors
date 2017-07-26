@@ -121,7 +121,6 @@ function finishPath( evt ) {
     $drawingArea.off( 'mousemove touchmove', continuePath );
     $(window).off( 'mouseup touchend', finishPath );
     $drawingArea.off( 'mouseleave', finishPath );
-    continuePath( evt );
     saveDrawing( );
 }
 
@@ -158,10 +157,10 @@ function changeLineWidth( evt ) {
 
 function getCanvasPos( evt ) {
     var offset = $drawingArea.offset();
-    var cx = evt.clientX;
-    var cy = evt.clientY;
-    var x = cx - offset.left;
-    var y = cy - offset.top;
+    var cx = (evt.clientX !== undefined) ? evt.clientX : evt.touches[0].clientX;
+    var cy = (evt.clientY !== undefined) ? evt.clientY : evt.touches[0].clientY;
+    var x = cx - offset.left + $(document).scrollLeft();
+    var y = cy - offset.top + $(document).scrollTop();
     x *= canvasScale;
     y *= canvasScale;
     return {
