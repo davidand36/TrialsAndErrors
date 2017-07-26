@@ -25,7 +25,7 @@ var lastPos;
 //=============================================================================
 
 init( );
-$drawingArea.on( 'mousedown', startPath );
+$drawingArea.on( 'mousedown touchstart', startPath );
 $(window).on( 'resize', resize );
 $('#color').on( 'click change input', changeColor );
 $('#eraser').on( 'click', setEraser );
@@ -102,8 +102,9 @@ function startPath( evt ) {
     context.beginPath( );
     context.moveTo( pos.x, pos.y );
 
-    $drawingArea.on( 'mousemove', continuePath );
-    $(window).on( 'mouseup', finishPath );
+    $drawingArea.on( 'mousemove touchmove', continuePath );
+    $(window).on( 'mouseup touchend', finishPath );
+    $drawingArea.on( 'mouseleave', finishPath );
 }
 
 //-----------------------------------------------------------------------------
@@ -117,8 +118,9 @@ function continuePath( evt ) {
 //-----------------------------------------------------------------------------
 
 function finishPath( evt ) {
-    $drawingArea.off( 'mousemove', continuePath );
-    $(window).off( 'mouseup', finishPath );
+    $drawingArea.off( 'mousemove touchmove', continuePath );
+    $(window).off( 'mouseup touchend', finishPath );
+    $drawingArea.off( 'mouseleave', finishPath );
     continuePath( evt );
     saveDrawing( );
 }
@@ -156,8 +158,10 @@ function changeLineWidth( evt ) {
 
 function getCanvasPos( evt ) {
     var offset = $drawingArea.offset();
-    var x = evt.clientX - offset.left;
-    var y = evt.clientY - offset.top;
+    var cx = evt.clientX;
+    var cy = evt.clientY;
+    var x = cx - offset.left;
+    var y = cy - offset.top;
     x *= canvasScale;
     y *= canvasScale;
     return {
