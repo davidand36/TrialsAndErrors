@@ -1,0 +1,9 @@
+/*
+    svgCanvas.css
+*/
+
+img {
+    border: thin solid lightslategray;
+    margin: 20px;
+    width: 100px;
+}
