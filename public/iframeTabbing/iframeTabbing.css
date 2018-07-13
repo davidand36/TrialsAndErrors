@@ -1,0 +1,9 @@
+/*
+    iframeTabbing.css
+*/
+
+.kbd-highlighted {
+  outline-width: 2px !important;
+  outline-style: solid !important;
+  outline-color: green !important;
+}
