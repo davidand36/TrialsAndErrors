@@ -20,3 +20,20 @@
 [role="treeitem"][aria-expanded="true"] > [role="group"] {
     display: block;
 }
+
+[role="treeitem"] > .itemWrap:before {
+    font-family: monospace;
+    margin-right: 0.6em;
+    content: "_";
+    visibility: hidden;
+}
+
+[role="treeitem"][aria-expanded="false"] > .itemWrap:before {
+    content: "▶";
+    visibility: visible;
+}
+
+[role="treeitem"][aria-expanded="true"] > .itemWrap:before {
+    content: "▼";
+    visibility: visible;
+}
