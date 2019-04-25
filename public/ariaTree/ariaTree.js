@@ -5,26 +5,29 @@
 initAriaMarkup( );
 setupEventHandlers( );
 setFocusToFirstItem( );
+setButtonVisibility( );
 
 function initAriaMarkup( ) {
-    $('.level.root')
+    $( '.level.root' )
         .attr( 'role', 'tree' )
         .attr( 'aria-labelledby', 'title' );
-    $('.level').not('.root').not('.header')
+    $( '.level' ).not( '.root' ).not( '.header' )
         .attr( 'role', 'group' );
-    $('.item')
+    $( '.item' )
         .attr( 'role', 'treeitem' );
-    $('.item').not('.leaf')
+    $( '.item' ).not( '.leaf' )
         .attr( 'aria-expanded', 'false' );
 }
 
 function setupEventHandlers( ) {
     $( document ).on( 'click', '.item', handleItemClick );
     $( document ).on( 'keydown', '.item', handleKeydown );
+    $( '#expandAll, #expandAllB' ).on( 'click', expandAll );
+    $( '#collapseAll, #collapseAllB' ).on( 'click', collapseAll );
 }
 
 function handleItemClick( evt ) {
-    var $item = $( evt.target );
+    var $item = $( evt.currentTarget );
     var ariaExpanded = $item.attr( 'aria-expanded' );
 
     if ( ariaExpanded === 'true' ) {
@@ -41,7 +44,7 @@ function handleKeydown( evt ) {
     if ( evt.ctrlKey || evt.altKey || evt.metaKey ) {
         return;
     }
-    var $item = $(evt.currentTarget);
+    var $item = $( evt.currentTarget );
     var ariaExpanded = $item.attr( 'aria-expanded' );
     switch ( evt.which ) {
         case 38: //Up
@@ -108,75 +111,60 @@ function handleKeydown( evt ) {
 }
 
 function setFocusToItem( $item ) {
+    if ( ! $item ) {
+        return;
+    }
     $( '.itemWrap' ).attr( 'tabIndex', -1 );
-    var $itemWrap = $item.children('.itemWrap').first();
+    var $itemWrap = $item.children('.itemWrap' ).first();
     $itemWrap.attr( 'tabIndex', 0 ).focus( );
 }
 
 function setFocusToPreviousItem( $item ) {
-    var item = $item[0];
     var $prevItem;
-    var $items = $('.item');
+    var $items = $( '.item' );
     for ( var i = 0, len = $items.length; i < len; ++i ) {
-        var ti = $items[i];
-        var $ti = $(ti);
-        if ( ti === item ) {
+        var $ti = $items.eq( i );
+        if ( $ti[0] === $item[0] ) {
             break;
         }
-        if ( $ti.is(':visible') ) {
+        if ( $ti.is(':visible' ) ) {
             $prevItem = $ti;
         }
     }
-
-    if ( $prevItem ) {
-        setFocusToItem( $prevItem );
-    }
+    setFocusToItem( $prevItem );
 }
 
 function setFocusToNextItem( $item ) {
-    var item = $item[0];
     var $nextItem;
-    var $items = $('.item');
+    var $items = $( '.item' );
     for ( var i = $items.length - 1; i >= 0; --i ) {
-        var ti = $items[i];
-        var $ti = $(ti);
-        if ( ti === item ) {
+        var $ti = $items.eq( i );
+        if ( $ti[0] === $item[0] ) {
             break;
         }
-        if ( $ti.is(':visible') ) {
+        if ( $ti.is(':visible' ) ) {
             $nextItem = $ti;
         }
     }
-
-    if ( $nextItem ) {
-        setFocusToItem( $nextItem );
-    }
+    setFocusToItem( $nextItem );
 }
 
 function setFocusToFirstItem( ) {
-    var $visItems = $('.item:visible');
-    if ( $visItems.length > 0 ) {
-        setFocusToItem( $visItems.first() );
-    }
+    setFocusToItem( $( '.item:visible' ).first() );
 }
 
 function setFocusToLastItem( ) {
-    var $visItems = $( '.item:visible' );
-    if ( $visItems.length > 0 ) {
-        setFocusToItem( $visItems.last() );
-    }
+    setFocusToItem( $( '.item:visible' ).last() );
 }
 
 function setFocusToParentItem( $item ) {
-    var $parent = $item.parent( '.item' );
-    if ( $parent ) {
-        setFocusToItem( $parent );
-    }
+    setFocusToItem( $item.parent().closest( '.item' ) );
 }
 
 function expandTreeItem( $item ) {
-    if ( $item.attr( 'aria-expanded') === 'false' ) {
+    if ( $item.attr( 'aria-expanded' ) === 'false' ) {
         $item.attr( 'aria-expanded', 'true' );
+        setButtonVisibility();
     }
 }
 
@@ -191,5 +179,39 @@ function collapseTreeItem( $item ) {
     if ( $groupTreeItem ) {
         $groupTreeItem.attr( 'aria-expanded', 'false' );
         setFocusToItem( $groupTreeItem );
+        setButtonVisibility();
     }
+}
+
+function setButtonVisibility( setFocus ) {
+    if ( $( '[aria-expanded="true"]' ).length > 0 ) {
+        $( '#collapseAll, #collapseAllB' ).show( );
+        if ( setFocus ) {
+            $( '#collapseAll' ).focus();
+        }
+    } else {
+        $( '#collapseAll, #collapseAllB' ).hide( );
+    }
+    if ( $( '[aria-expanded="false"]' ).length > 0 ) {
+        $( '#expandAll, #expandAllB' ).show( );
+        if ( setFocus ) {
+            $( '#expandAll' ).focus();
+        }
+    } else {
+        $( '#expandAll, #expandAllB' ).hide( );
+    }
+}
+
+function expandAll( ) {
+    $( '[aria-expanded="false"]' ).attr( 'aria-expanded', 'true' );
+    setButtonVisibility( true );
+}
+
+function collapseAll( ) {
+    $( '[aria-expanded="true"]' ).attr( 'aria-expanded', 'false' );
+    var $curItemWrap = $( '.itemWrap[ tabindex=0 ]' );
+    if ( ! $curItemWrap.is( ':visible' ) ) {
+        setFocusToItem( $curItemWrap.closest( '.item:visible' ) );
+    }
+    setButtonVisibility( true );
 }
