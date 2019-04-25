@@ -5,6 +5,13 @@
 [role="tree"] {
     margin: 0;
     padding: 0;
+    list-style: none;
+}
+
+[role="tree"] li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 [role="group"] {
