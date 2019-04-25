@@ -1,0 +1,22 @@
+/*
+    ariaTree.css
+*/
+
+[role="tree"] {
+    margin: 0;
+    padding: 0;
+}
+
+[role="group"] {
+    margin: 0;
+    padding: 0;
+    margin-left: 2em;
+}
+
+[role="treeitem"][aria-expanded="false"] > [role="group"] {
+    display: none;
+}
+
+[role="treeitem"][aria-expanded="true"] > [role="group"] {
+    display: block;
+}

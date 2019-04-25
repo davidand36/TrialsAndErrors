@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ARIA Tree</title>
+    <link rel="stylesheet" type="text/css" href="ariaTree.css" />
+  </head>
+
+  <body>
+    <h1>ARIA Tree</h1>
+    <h2>Tree view widget based on <a href="https://www.w3.org/TR/wai-aria-practices/#TreeView">W3C WAI-ARIA Authoring Practices</a></h2>
+
+    <div>
+      <h3 class="level header" id="title">Tree 1</h3>
+      <button type="button" id="expandAll">Expand All</button>
+      <button type="button" id="collapseAllA">Collapse All</button>
+
+      <div class="level root">
+        <div class="item" id="I">
+          <p class="itemWrap">I. Node I</p>
+          <div class="level one">
+            <div class="item" id="I.A">
+              <p class="itemWrap">A. Node I.A</p>
+              <div class="level two">
+                <div class="item leaf" id="I.A.1">
+                  <p class="itemWrap">1. Node I.A.1</p>
+                </div>
+              </div>
+            </div>
+            <div class="item leaf" id="I.B">
+              <p class="itemWrap">B. Node I.B</p>
+            </div>
+          </div>
+        </div>
+        <div class="item leaf" id="II">
+          <p class="itemWrap">II. Node II</p>
+        </div>
+        <div class="item leaf" id="III">
+          <p class="itemWrap">III. Node III</p>
+        </div>
+      </div>
+
+      <button type="button" id="collapseAllB">Collapse All</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="  crossorigin="anonymous"></script>
+    <script src="ariaTree.js"></script>
+  </body>
+</html>
