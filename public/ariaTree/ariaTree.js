@@ -224,9 +224,9 @@ function expandAll( ) {
 
 function collapseAll( ) {
     $( '[aria-expanded="true"]' ).attr( 'aria-expanded', 'false' );
-    var $curItemWrap = $( '.itemWrap[ tabindex=0 ]' );
-    if ( ! $curItemWrap.is( ':visible' ) ) {
-        setFocusToItem( $curItemWrap.closest( '.item:visible' ) );
+    var $curItem = $( '.item[ tabindex=0 ]' );
+    if ( ! $curItem.is( ':visible' ) ) {
+        setFocusToItem( $curItem.closest( '.item:visible' ) );
     }
     setButtonVisibility( true );
 }
