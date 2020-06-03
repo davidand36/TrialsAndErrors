@@ -22,6 +22,8 @@ function initAriaMarkup( ) {
 function setupEventHandlers( ) {
     $( document ).on( 'click', '.item', handleItemClick );
     $( document ).on( 'keydown', '.item', handleKeydown );
+    $( document ).on( 'focus', '.item', handleFocus );
+    $( document ).on( 'blur', '.item', handleBlur );
     $( '#expandAll, #expandAllB' ).on( 'click', expandAll );
     $( '#collapseAll, #collapseAllB' ).on( 'click', collapseAll );
 }
@@ -110,13 +112,26 @@ function handleKeydown( evt ) {
     }
 }
 
+function handleFocus( evt ) {
+    evt.stopPropagation();
+    var $item = $( evt.currentTarget );
+    var $itemWrap = $item.children( '.itemWrap' ).first();
+    $itemWrap.addClass( 'focus' );
+}
+
+function handleBlur( evt ) {
+    evt.stopPropagation();
+    var $item = $( evt.currentTarget );
+    var $itemWrap = $item.children( '.itemWrap' ).first();
+    $itemWrap.removeClass( 'focus' );
+}
+
 function setFocusToItem( $item ) {
     if ( ! $item ) {
         return;
     }
-    $( '.itemWrap' ).attr( 'tabIndex', -1 );
-    var $itemWrap = $item.children('.itemWrap' ).first();
-    $itemWrap.attr( 'tabIndex', 0 ).focus( );
+    $( '.item' ).attr( 'tabIndex', -1 );
+    $item.attr( 'tabIndex', 0 ).focus();
 }
 
 function setFocusToPreviousItem( $item ) {

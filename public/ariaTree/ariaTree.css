@@ -44,3 +44,13 @@
     content: "▼";
     visibility: visible;
 }
+
+[role="treeitem"]:focus {
+    outline: 0;
+}
+
+[role="treeitem"].focus,
+.itemWrap.focus {
+    outline: 2px solid rgb( 165, 199, 254 );
+    outline: 5px auto -webkit-focus-ring-color;
+}
