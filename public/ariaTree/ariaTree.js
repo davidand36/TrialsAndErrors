@@ -2,10 +2,13 @@
     ariaTree.js
 */
 
+var colors = [ 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet' ];
+
 initAriaMarkup( );
 setupEventHandlers( );
 setFocusToFirstItem( );
 setButtonVisibility( );
+initColorButtons( );
 
 function initAriaMarkup( ) {
     $( '.level.root' )
@@ -29,6 +32,10 @@ function setupEventHandlers( ) {
 }
 
 function handleItemClick( evt ) {
+    if ( isTargetInteractive( evt ) ) {
+        return;
+    }
+
     var $item = $( evt.currentTarget );
     var ariaExpanded = $item.attr( 'aria-expanded' );
 
@@ -46,7 +53,10 @@ function handleKeydown( evt ) {
     if ( evt.ctrlKey || evt.altKey || evt.metaKey ) {
         return;
     }
-    var $item = $( evt.currentTarget );
+    var $item = $( evt.target );
+    if ( ! $item.is( '.item' ) ) {
+        return;
+    }
     var ariaExpanded = $item.attr( 'aria-expanded' );
     switch ( evt.which ) {
         case 38: //Up
@@ -113,6 +123,9 @@ function handleKeydown( evt ) {
 }
 
 function handleFocus( evt ) {
+    if ( isTargetInteractive( evt ) ) {
+        return;
+    }
     evt.stopPropagation();
     var $item = $( evt.currentTarget );
     var $itemWrap = $item.children( '.itemWrap' ).first();
@@ -120,10 +133,18 @@ function handleFocus( evt ) {
 }
 
 function handleBlur( evt ) {
+    if ( isTargetInteractive( evt ) ) {
+        return;
+    }
     evt.stopPropagation();
     var $item = $( evt.currentTarget );
     var $itemWrap = $item.children( '.itemWrap' ).first();
     $itemWrap.removeClass( 'focus' );
+}
+
+function isTargetInteractive( evt ) {
+    var $target = $( evt.target );
+    return $target.is( ':input' );
 }
 
 function setFocusToItem( $item ) {
@@ -229,4 +250,30 @@ function collapseAll( ) {
         setFocusToItem( $curItem.closest( '.item:visible' ) );
     }
     setButtonVisibility( true );
+}
+
+function initColorButtons( ) {
+    $( 'button.colors' ).each( function( i, btn ) {
+        var c = Math.floor( Math.random() * colors.length );
+        setColorButton( $(btn), c );
+    } );
+    $( 'button.colors' ).on( 'click', handleColorButtonClick );
+}
+
+function handleColorButtonClick( evt ) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    var $btn = $( this );
+    var c = parseInt( $btn.attr( 'data-color' ), 10 );
+    if ( ++c >= colors.length ) {
+        c = 0;
+    }
+    setColorButton( $btn, c );
+}
+
+function setColorButton( $btn, c ) {
+    var color = colors[ c ];
+    $btn.attr( 'data-color', c )
+        .css( 'background-color', color )
+        .text( color );
 }
