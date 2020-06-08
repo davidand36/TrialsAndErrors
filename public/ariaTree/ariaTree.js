@@ -53,6 +53,7 @@ function handleItemClick( evt ) {
 }
 
 function handleItemKeydown( evt ) {
+    console.log( 'handleItemKeydown (' + evt.which + ')', evt.currentTarget );
     var stopPropAndDefault = false;
     if ( evt.ctrlKey || evt.altKey || evt.metaKey ) {
         return;
@@ -110,7 +111,6 @@ function handleItemKeydown( evt ) {
         case 13: //Enter
         case 32: //Space
         {
-            console.log( 'handleItemKeydown (' + evt.which + ')', evt.currentTarget );
             if ( ariaExpanded === 'true' ) {
                 collapseTreeItem( $item );
             } else if ( ariaExpanded === 'false' ) {
