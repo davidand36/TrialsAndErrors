@@ -27,10 +27,6 @@ function setupEventHandlers( ) {
     $( document ).on( 'keydown', '.item', handleItemKeydown );
     $( document ).on( 'focus', '.item', handleItemFocus );
     $( document ).on( 'blur', '.item', handleItemBlur );
-    //The next three are just for logging/debugging Chrome+JAWS
-    $( document ).on( 'focus', '.item :input', handleItemButtonFocus );
-    $( document ).on( 'blur', '.item :input', handleItemButtonBlur );
-    $( document ).on( 'keydown', '.item :input', handleItemButtonKeydown );
     $( '#expandAll, #expandAllB' ).on( 'click', expandAll );
     $( '#collapseAll, #collapseAllB' ).on( 'click', collapseAll );
 }
@@ -53,7 +49,6 @@ function handleItemClick( evt ) {
 }
 
 function handleItemKeydown( evt ) {
-    console.log( 'handleItemKeydown (' + evt.which + ')', evt.currentTarget );
     var stopPropAndDefault = false;
     if ( evt.ctrlKey || evt.altKey || evt.metaKey ) {
         return;
@@ -132,7 +127,6 @@ function handleItemFocus( evt ) {
         return;
     }
     evt.stopPropagation();
-    console.log( 'handleItemFocus', evt.currentTarget );
     var $item = $( evt.currentTarget );
     var $itemWrap = $item.children( '.itemWrap' ).first();
     $itemWrap.addClass( 'focus' );
@@ -146,25 +140,6 @@ function handleItemBlur( evt ) {
     var $item = $( evt.currentTarget );
     var $itemWrap = $item.children( '.itemWrap' ).first();
     $itemWrap.removeClass( 'focus' );
-}
-
-//Other than for logging, this doesn't seem necessary or helpful
-function handleItemButtonFocus( evt ) {
-    evt.stopPropagation();
-    console.log( 'handleItemButtonFocus', evt.currentTarget );
-}
-
-//Other than for logging, this doesn't seem necessary or helpful
-function handleItemButtonBlur( evt ) {
-    evt.stopPropagation();
-}
-
-//Other than for logging, this doesn't seem necessary or helpful
-function handleItemButtonKeydown( evt ) {
-    if ( evt.which === 13 || evt.which === 32 ) { //enter or space
-        evt.stopPropagation();
-        console.log( 'handleItemButtonKeydown (' + evt.which + ')', evt.currentTarget );
-    }
 }
 
 function isTargetInteractive( evt ) {
@@ -279,8 +254,9 @@ function collapseAll( ) {
 
 function initColorButtons( ) {
     $( 'button.colors' ).each( function( i, btn ) {
+        $( btn ).attr( 'role', 'treeitem' ); //Required within a tree view
         var c = Math.floor( Math.random() * colors.length );
-        setColorButton( $(btn), c );
+        setColorButton( $( btn ), c );
     } );
     $( 'button.colors' ).on( 'click', handleColorButtonClick );
 }
