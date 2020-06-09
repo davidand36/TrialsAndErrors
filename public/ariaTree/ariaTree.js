@@ -20,6 +20,8 @@ function initAriaMarkup( ) {
         .attr( 'role', 'treeitem' );
     $( '.item' ).not( '.leaf' )
         .attr( 'aria-expanded', 'false' );
+    $( '.item :input' )                 //Every interactive element in a tree
+        .attr( 'role', 'treeitem' );    // must have this role.
 }
 
 function setupEventHandlers( ) {
@@ -254,7 +256,6 @@ function collapseAll( ) {
 
 function initColorButtons( ) {
     $( 'button.colors' ).each( function( i, btn ) {
-        $( btn ).attr( 'role', 'treeitem' ); //Required within a tree view
         var c = Math.floor( Math.random() * colors.length );
         setColorButton( $( btn ), c );
     } );
