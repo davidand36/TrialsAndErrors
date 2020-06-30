@@ -43,11 +43,10 @@ function handleItemClick( evt ) {
 
     if ( ariaExpanded === 'true' ) {
         collapseTreeItem( $item );
-        evt.stopPropagation();
     } else if ( ariaExpanded === 'false' ) {
         expandTreeItem( $item );
-        evt.stopPropagation();
     }
+    evt.stopPropagation();
 }
 
 function handleItemKeydown( evt ) {
