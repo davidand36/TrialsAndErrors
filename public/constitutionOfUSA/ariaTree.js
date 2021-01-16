@@ -32,77 +32,55 @@ function handleItemClick( evt ) {
 }
 
 function handleItemKeydown( evt ) {
-    var stopPropAndDefault = false;
     if ( evt.ctrlKey || evt.altKey || evt.metaKey ) {
         return;
     }
     var $item = $( evt.target );
-    if ( !$item.is( '[role="treeitem"]' ) ) {
+    if ( ! $item.is( '[role="treeitem"]' ) ) {
         return;
     }
     var ariaExpanded = $item.attr( 'aria-expanded' );
     switch ( evt.which ) {
         case 38: //Up
-            {
-                setFocusToPreviousItem( $item );
-                stopPropAndDefault = true;
-                break;
-            }
+            setFocusToPreviousItem( $item );
+            break;
         case 40: //Down
-            {
-                setFocusToNextItem( $item );
-                stopPropAndDefault = true;
-                break;
-            }
+            setFocusToNextItem( $item );
+            break;
         case 37: //Left
-            {
-                if ( ariaExpanded === 'true' ) {
-                    collapseTreeItem( $item )
-                } else {
-                    setFocusToParentItem( $item );
-                }
-                stopPropAndDefault = true;
-                break;
+            if ( ariaExpanded === 'true' ) {
+                collapseTreeItem( $item )
+            } else {
+                setFocusToParentItem( $item );
             }
+            break;
         case 39: //Right
-            {
-                if ( ariaExpanded === 'true' ) {
-                    setFocusToNextItem( $item );
-                } else if ( ariaExpanded === 'false' ) {
-                    expandTreeItem( $item );
-                }
-                stopPropAndDefault = true;
-                break;
+            if ( ariaExpanded === 'true' ) {
+                setFocusToNextItem( $item );
+            } else if ( ariaExpanded === 'false' ) {
+                expandTreeItem( $item );
             }
+            break;
         case 36: //Home
-            {
-                setFocusToFirstItem();
-                stopPropAndDefault = true;
-                break;
-            }
+            setFocusToFirstItem();
+            break;
         case 35: //End
-            {
-                setFocusToLastItem();
-                stopPropAndDefault = true;
-                break;
-            }
+            setFocusToLastItem();
+            break;
         case 13: //Enter
         case 32: //Space
-            {
-                if ( ariaExpanded === 'true' ) {
-                    collapseTreeItem( $item );
-                } else if ( ariaExpanded === 'false' ) {
-                    expandTreeItem( $item );
-                }
-                stopPropAndDefault = true;
-                break;
+            if ( ariaExpanded === 'true' ) {
+                collapseTreeItem( $item );
+            } else if ( ariaExpanded === 'false' ) {
+                expandTreeItem( $item );
             }
+            break;
+        default:
+            return;
     }
 
-    if ( stopPropAndDefault ) {
-        evt.stopPropagation();
-        evt.preventDefault();
-    }
+    evt.stopPropagation();
+    evt.preventDefault();
 }
 
 function handleItemFocus( evt ) {
@@ -131,7 +109,7 @@ function isTargetInteractive( evt ) {
 }
 
 function setFocusToItem( $item ) {
-    if ( !$item ) {
+    if ( ! $item ) {
         return;
     }
     $( '[role="treeitem"]' ).attr( 'tabIndex', -1 );
@@ -229,7 +207,7 @@ function expandAll() {
 function collapseAll() {
     $( '[aria-expanded="true"]' ).attr( 'aria-expanded', 'false' );
     var $curItem = $( '[role="treeitem"][ tabindex=0 ]' );
-    if ( !$curItem.is( ':visible' ) ) {
+    if ( ! $curItem.is( ':visible' ) ) {
         setFocusToItem( $curItem.closest( '[role="treeitem"]:visible' ) );
     }
     setButtonVisibility( true );
