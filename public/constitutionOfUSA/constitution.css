@@ -1,0 +1,63 @@
+/*
+    constitution.css
+*/
+
+body {
+    max-width: 50rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Libre Baskerville', serif;
+    background-color: rgb( 247, 240, 226 );
+}
+
+h1 {
+    text-align: center;
+}
+
+.preamble-label, .article-label, .amendments-label, .amendment-label {
+    font-size: 1.4rem;
+}
+
+.section-label {
+    font-size: 1.2rem;
+}
+
+.clause-label {
+    font-size: 1.0rem;
+}
+
+.added-text {
+    font-style: italic;
+    color: rgb( 80, 80, 80);
+}
+
+.controls {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+button {
+    margin-left: 1em;
+    border-width: thin;
+    border-style: solid;
+    border-radius: 0.25rem;
+    padding: 0.25rem 1.5rem;
+    text-decoration: none;
+    line-height: normal;
+    white-space: nowrap;
+    font-family: sans-serif;
+    font-size: 1rem;
+}
+
+.primary-button {
+    border-color: #000d74;
+    background-color: #b9d9eb;
+    color: #000d74;
+}
+
+.primary-button:hover {
+    background-color: #e3f0f7;
+}

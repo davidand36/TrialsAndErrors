@@ -1,0 +1,57 @@
+/*
+    ariaTree.css
+*/
+
+[role="tree"] {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+[role="group"] {
+    margin: 0;
+    padding: 0;
+    margin-left: 2em;
+}
+
+[role="treeitem"],
+.tree-leaf {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+[aria-expanded="false"] > [role="group"] {
+    display: none;
+}
+
+[aria-expanded="true"] > [role="group"] {
+    display: block;
+}
+
+[role="treeitem"] > .treeitem-text:before {
+    font-family: monospace;
+    margin-right: 0.6em;
+    content: "_";
+    visibility: hidden;
+}
+
+[aria-expanded="false"] > .treeitem-text:before {
+    content: "▶";
+    visibility: visible;
+}
+
+[aria-expanded="true"] > .treeitem-text:before {
+    content: "▼";
+    visibility: visible;
+}
+
+[role="treeitem"]:focus {
+    outline: 0;
+}
+
+[role="treeitem"].focus,
+[role="treeitem"] > .treeitem-text.focus {
+    outline: 2px solid rgb( 165, 199, 254);
+    outline: 5px auto -webkit-focus-ring-color;
+}
