@@ -110,7 +110,7 @@ function buildCalculatedColors() {
 
   colors = baseColor.tetrad();
   titles = [ '0', '1', '2', '3' ];
-  section = makeColorSequence( 'Split Complement', colors, titles );
+  section = makeColorSequence( 'Tetrad', colors, titles );
   $( '#calculatedColors' ).append( section );
 }
 
