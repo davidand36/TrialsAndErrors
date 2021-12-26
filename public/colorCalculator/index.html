@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+
+  <head>
+    <meta charset="UTF-8" />
+    <title>Color Calculator</title>
+    <link rel="stylesheet" type="text/css" href="colorCalculator.css" />
+  </head>
+
+  <body>
+    <h1>Color Calculator</h1>
+    <h2>Thanks to <a href="https://github.com/bgrins/TinyColor" target="_blank">TinyColor</a></h2>
+
+    <form class="form">
+      <label>
+        Base color:
+        <input type="text" id="baseColor" placeholder="hex, rgb, hsl, or hsv" />
+      </label>
+      <label>
+        Text color:
+        <input type="text" id="textColor" placeholder="hex, rgb, hsl, or hsv" />
+      </label>
+    </form>
+
+    <div id="calculatedColors"></div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="tinycolor.js"></script>
+    <script src="colorCalculator.js"></script>
+  </body>
+  
